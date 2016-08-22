@@ -2,13 +2,17 @@ package com.ll.test.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.ll.test.R;
 import com.ll.test.log.L;
 
 /**
  * Created by LL on 2016/8/22.
  */
 public class CycleActivity extends Activity {
+    private TextView ll;
+
     private void i(String msg) {
         L.i(getClass().getName(), msg);
     }
@@ -16,6 +20,8 @@ public class CycleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.t);
+        ll = (TextView) findViewById(R.id.ll);
         i("onCreate");
     }
 
@@ -28,13 +34,19 @@ public class CycleActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        i("onStart");
+        i("onStart" + ll.getHeight());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        i("onResume");
+        i("onResume" + ll.getHeight());
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        i("onWindowFocusChanged" + ll.getHeight());
     }
 
     @Override
