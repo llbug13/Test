@@ -3,6 +3,7 @@
     package="com.ll.test">
 
     <application
+        android:name=".app.app"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
