@@ -5,6 +5,7 @@
     android:fillBefore="false"
     android:interpolator="@android:anim/accelerate_interpolator"
     android:shareInterpolator="true"
+
     android:startOffset="20">
     <alpha
         android:startOffset="20"
