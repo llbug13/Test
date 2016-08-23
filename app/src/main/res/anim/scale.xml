@@ -2,6 +2,7 @@
 <scale xmlns:android="http://schemas.android.com/apk/res/android"
     android:fromXScale="0.2"
     android:toXScale="0.4"
+
     android:pivotX="0.3">
 
 </scale>
