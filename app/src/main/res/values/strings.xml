@@ -1,3 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Test</string>
+    <plurals name="unicornCunt">
+        <item quantity="other">%d unicorns</item>
+        <item quantity="one">unicorns</item>
+        <item quantity="zero">unicornsooooooo</item>
+        <item quantity="few">unicornsllllllllllll</item>
+    </plurals>
 </resources>
