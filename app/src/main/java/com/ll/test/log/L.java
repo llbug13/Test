@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by LL on 2016/8/22.
  */
 public class L {
-    private static boolean IS_BUG = true;
+    private final static boolean IS_BUG = true;
 
     public static void i(String msg) {
         if (IS_BUG) {
