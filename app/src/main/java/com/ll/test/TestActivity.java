@@ -1,6 +1,7 @@
 package com.ll.test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -53,5 +54,13 @@ public class TestActivity extends Activity {
     public void finish() {
         L.i("onDestroyfinishfinishfinish");
         super.finish();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+//        activity在创建后获取到intent
+        super.onNewIntent(intent);
+//        传递责任
+//        startNextMatchingActivity(intent);
     }
 }
