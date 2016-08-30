@@ -1,16 +1,24 @@
 package com.ll.test.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 
 /**
  * Created by LL on 2016/8/22.
  */
 public class app extends Application {
+    private static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
 //        应用在创建时调用
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     @Override
