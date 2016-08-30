@@ -2,19 +2,75 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ll.test">
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
     <application
+        android:name=".app.app"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".save.MyFragmentPreferenceActivity">
             <intent-filter>
+                <!--动作 多个 具有唯一性-->
                 <action android:name="android.intent.action.MAIN" />
-
+                <!--分类 在那种情况下为action提供服务  可以多个 有Android标准的和自定义的-->
+                <!--<category android:name="android.intent.category.ALTERNATIVE" />-->
+                <!--出现在应用程序的启动器中-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TestActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--指定home 不指定action可以把它作为本地屏幕的可选项-->
+            <!--<category android:name="android.intent.category.HOME" />-->
+            <!--<data-->
+            <!--android:host="主机名"-->
+            <!--android:mimeType=".asd"-->
+            <!--android:path="/ll/oo"-->
+            <!--android:port="80"-->
+            <!--android:scheme="conent or http" />-->
+
+            <!--点击链接打开界面-->
+            <!--<action android:name="android.intent.action.VIEW" />-->
+
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--BROWSABLE是必须的-->
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
+            <!--http://www.ll.com-->
+            <!--<data-->
+            <!--android:host="www.ll.com"-->
+            <!--android:mimeType="earthquakes/*"-->
+            <!--android:scheme="http" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <!--<activity android:name=".activity.CycleActivity" />-->
+        <!--测试广播-->
+        <receiver
+            android:name=".receiver.ReceiverTest"
+            android:permission="com.ll.permission">
+            <!--android:priority="100"只对有序的广播设置优先级是好的做法-->
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+
+            </intent-filter>
+        </receiver>
+        <!--程序插件-->
+        <!--<activity android:name=".activity.PlugInActivity">-->
+        <!--<intent-filter android:label="程序插件">-->
+        <!--<action android:name="lllll" />-->
+        <!--<data android:mimeType="vnd.moonbase.cursor.item/*" />-->
+        <!--&lt;!&ndash;SELECTED_ALTERNATIVE或者ALTERNATIVE的一个或者两个&ndash;&gt;-->
+        <!--&lt;!&ndash;决定动作何时可用&ndash;&gt;-->
+        <!--<category android:name="android.intent.category.ALTERNATIVE" />-->
+        <!--<category android:name="android.intent.category.SELECTED_ALTERNATIVE" />-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
     </application>
 
 </manifest>
