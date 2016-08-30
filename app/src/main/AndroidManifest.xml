@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PlugInActivity">
+        <activity android:name=".save.MyFragmentPreferenceActivity">
             <intent-filter>
                 <!--动作 多个 具有唯一性-->
                 <action android:name="android.intent.action.MAIN" />
