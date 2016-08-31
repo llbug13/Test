@@ -15,8 +15,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".save.MyFragmentPreferenceActivity"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".save.MyFragmentPreferenceActivity" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <!--动作 多个 具有唯一性-->
@@ -74,6 +75,10 @@
         <!--<category android:name="android.intent.category.SELECTED_ALTERNATIVE" />-->
         <!--</intent-filter>-->
         <!--</activity>-->
+        <provider
+            android:name=".sql.ContentProviderTest"
+            android:authorities="com.bgtx.runquick.provider.test" />
+        <!-- android:authorities="downloads.com.bgtx.runquick"-->
     </application>
 
 </manifest>
