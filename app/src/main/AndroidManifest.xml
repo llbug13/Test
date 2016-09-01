@@ -79,6 +79,24 @@
             android:name=".sql.ContentProviderTest"
             android:authorities="com.bgtx.runquick.provider.test" />
         <!-- android:authorities="downloads.com.bgtx.runquick"-->
+        <!--<activity android:name=".DatabaseSkeletonSearchActivity"-->
+        <!--android:label="Element Search"-->
+        <!--android:launchMode="singleTop">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.SEARCH" />-->
+        <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--</intent-filter>-->
+        <!--<meta-data-->
+        <!--android:name="android.app.searchable"-->
+        <!--android:resource="@xml/searchable"-->
+        <!--/>-->
+        <!--</activity>-->
+
+        <!--&lt;!&ndash; Listing 8-26: Setting a default search result Activity for an application &ndash;&gt;-->
+        <!--<meta-data-->
+        <!--android:name="android.app.default_searchable"-->
+        <!--android:value=".DatabaseSkeletonSearchActivity"-->
+        <!--/>-->
     </application>
 
 </manifest>

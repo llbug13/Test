@@ -184,11 +184,11 @@ public class SQLiteTest {
         hoardDBOpenHelper.close();
     }
 
-    private static class HoardDBOpenHelper extends SQLiteOpenHelper {
+    public static class HoardDBOpenHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_NAME = "myDatabase.db";
-        private static final String DATABASE_TABLE = "GoldHoards";
-        private static final int DATABASE_VERSION = 1;
+        public static final String DATABASE_NAME = "myDatabase.db";
+        public static final String DATABASE_TABLE = "GoldHoards";
+        public static final int DATABASE_VERSION = 1;
 
         // SQL Statement to create a new database.
 //        创建
