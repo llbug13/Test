@@ -13,6 +13,7 @@ public class ReceiverTest extends BroadcastReceiver {
 //    manifest注册（接收器）不一定在只可以在运输状态时才嗯呢接收，有匹配的intent自动启动
     @Override
     public void onReceive(Context context, Intent intent) {
+//        在主线程完成，不要超过10秒，耗时请开线程
 //        intent.getData
 //        context.sendBroadcast(intent,"");
 //        有序广播 Android：priority值越大优先级越高
