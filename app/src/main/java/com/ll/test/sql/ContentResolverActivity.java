@@ -26,6 +26,8 @@ import java.io.OutputStream;
 
 /**
  * Created by LL on 2016/9/1.
+ * <p>
+ * Loader创建自己的Loader，一般使用继承AsyncTaskLoader
  */
 public class ContentResolverActivity extends Activity {
 

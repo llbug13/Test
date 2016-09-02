@@ -4,6 +4,7 @@
     android:configChanges="screenSize|orientation|keyboardHidden">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
@@ -97,6 +98,11 @@
         <!--android:name="android.app.default_searchable"-->
         <!--android:value=".DatabaseSkeletonSearchActivity"-->
         <!--/>-->
+        <!--其他使用时要权限-->
+        <service
+            android:name=".service.ServivceTest"
+            android:enabled="true"
+            android:permission="con.ll.LL" />
     </application>
 
 </manifest>
