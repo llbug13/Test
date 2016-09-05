@@ -43,13 +43,23 @@ public class ServivceTest extends Service {
 
     //重新启动行为，不在建议使用onstart,并告诉系统在stopservice或stopself之前终止service，将如何重启
 //    START_NOT_STICKY
-//    如果系统在onStartCommand()方法返回之后杀死这个服务，那么直到接受到新的Intent对象，这个服务才会被重新创建。这是最安全的选项，用来避免在不需要的时候运行你的服务。
+//    如果系统在onStartCommand()方法返回之后杀死这个服务，
+// 那么直到接受到新的Intent对象，
+// 这个服务才会被重新创建。
+// 这是最安全的选项，用来避免在不需要的时候运行你的服务。
 //
 //    START_STICKY
-//    如果系统在onStartCommand()返回后杀死了这个服务，系统就会重新创建这个服务并且调用onStartCommand()方法，但是它不会重新传递最后的Intent对象，系统会用一个null的Intent对象来调用onStartCommand()方法，在这个情况下，除非有一些被发送的Intent对象在等待启动服务。这适用于不执行命令的媒体播放器（或类似的服务），它只是无限期的运行着并等待工作的到来。
+//    如果系统在onStartCommand()返回后杀死了这个服务，
+// 系统就会重新创建这个服务并且调用onStartCommand()方法，
+// 但是它不会重新传递最后的Intent对象，
+// 系统会用一个null的Intent对象来调用onStartCommand()方法，在这个情况下，
+// 除非有一些被发送的Intent对象在等待启动服务。这适用于不执行命令的媒体播放器（或类似的服务），
+// 它只是无限期的运行着并等待工作的到来。
 //
 //    START_REDELIVER_INTENT
-//    如果系统在onStartCommand()方法返回后，系统就会重新创建了这个服务，并且用发送给这个服务的最后的Intent对象调用了onStartCommand()方法。任意等待中的Intent对象会依次被发送。这适用于那些应该立即恢复正在执行的工作的服务，如下载文件。
+//    如果系统在onStartCommand()方法返回后，系统就会重新创建了这个服务，
+// 并且用发送给这个服务的最后的Intent对象调用了onStartCommand()方法。
+// 任意等待中的Intent对象会依次被发送。这适用于那些应该立即恢复正在执行的工作的服务，如下载文件。
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 //        flags==START_FLAG_REDELIVERY;调用stopself之前得重启

@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
-
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:name=".app.app"
         android:allowBackup="true"
@@ -18,8 +19,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".save.MyFragmentPreferenceActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".show.ActionBarTest"
             android:screenOrientation="portrait">
+            <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
                 <!--动作 多个 具有唯一性-->
                 <action android:name="android.intent.action.MAIN" />
