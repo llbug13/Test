@@ -1,15 +1,18 @@
 package com.ll.test.show;
 
-        import android.annotation.TargetApi;
-        import android.app.Notification;
-        import android.app.NotificationManager;
-        import android.content.Context;
-        import android.graphics.Color;
-        import android.media.RingtoneManager;
-        import android.net.Uri;
-        import android.os.Build;
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 
-        import com.ll.test.R;
+import com.ll.test.R;
 
 /**
  * Created by LL on 2016/9/5.
@@ -35,7 +38,7 @@ public class NotificationTest {
         notification.ledOffMS = 0;
         notification.ledOnMS = 1;
         notification.flags = notification.flags | Notification.FLAG_SHOW_LIGHTS;
-
+//        notification.largeIcon=
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -55,5 +58,30 @@ public class NotificationTest {
         Notification notification = builder.getNotification();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, builder.build());
+    }
+
+    private Notification.Builder customLayoutNotification(Context context) {
+        Notification.Builder builder =
+                new Notification.Builder(context);
+
+        Intent newIntent = new Intent("BUTTON_CLICK_ACTION");
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(context, 2, newIntent, 0);
+        Bitmap myIconBitmap = null; // TODO Obtain Bitmap
+
+        /**
+         * Listing 10-36: Applying a custom layout to the Notification status window
+         */
+        builder.setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("Notification")
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle("Title")
+                .setContentText("Subtitle")
+                .setContentInfo("Info")
+                .setLargeIcon(myIconBitmap)
+                .setContentIntent(pendingIntent);
+
+        //
+        return builder;
     }
 }

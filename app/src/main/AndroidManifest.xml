@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".save.MyFragmentPreferenceActivity" />
         <activity
-            android:name=".show.ActionBarTest"
+            android:name=".show.MyActivity"
             android:screenOrientation="portrait">
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
@@ -29,6 +29,11 @@
                 <!--<category android:name="android.intent.category.ALTERNATIVE" />-->
                 <!--出现在应用程序的启动器中-->
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".show.MyOtherActivity">
+            <intent-filter>
+                <action android:name="com.paad.notifications.action.BUTTON_CLICK" />
             </intent-filter>
         </activity>
         <activity android:name=".TestActivity">
