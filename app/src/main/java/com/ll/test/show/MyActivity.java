@@ -62,7 +62,13 @@ public class MyActivity extends Activity {
          */
         Notification.Builder builder =
                 new Notification.Builder(MyActivity.this);
-
+//        Notification.FLAG_SHOW_LIGHTS //三色灯提醒，在使用三色灯提醒时候必须加该标志符
+//        Notification.FLAG_ONGOING_EVENT //发起正在运行事件（活动中）
+//        Notification.FLAG_INSISTENT //让声音、振动无限循环，直到用户响应 （取消或者打开）
+//        Notification.FLAG_ONLY_ALERT_ONCE //发起Notification后，铃声和震动均只执行一次
+//        Notification.FLAG_AUTO_CANCEL //用户单击通知后自动消失
+//        Notification.FLAG_NO_CLEAR //只有全部清除时，Notification才会清除 ，不清楚该通知(QQ的通知无法清除，就是用的这个)
+//        Notification.FLAG_FOREGROUND_SERVICE //表示正在运行的服务
         builder.setSmallIcon(R.mipmap.ic_launcher)
                 .setTicker("Notification")
                 .setWhen(System.currentTimeMillis())
@@ -85,8 +91,10 @@ public class MyActivity extends Activity {
                 new Notification.Builder(MyActivity.this);
 
         Intent newIntent = new Intent(BUTTON_CLICK_ACTION);
+//        PendingIntent pendingIntent =
+//                PendingIntent.getBroadcast(MyActivity.this, 2, newIntent, 0);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(MyActivity.this, 2, newIntent, 0);
+                PendingIntent.getActivity(MyActivity.this, 2, newIntent, 0);
         Bitmap myIconBitmap = null; // TODO Obtain Bitmap
 
         /**
@@ -115,48 +123,61 @@ public class MyActivity extends Activity {
         RemoteViews myRemoteView =
                 new RemoteViews(this.getPackageName(),
                         R.layout.my_notification_layout);
-
-        builder.setSmallIcon(R.mipmap.ic_launcher)
-                .setTicker("Notification")
-                .setWhen(System.currentTimeMillis())
-                .setContentTitle("Progress")
-                .setProgress(100, 50, false)
-                .setContent(myRemoteView);
-
-        //
-        Notification notification = builder.getNotification();
-
-        /**
-         * Listing 10-39: Customizing your extended Notification window layout
-         */
-        notification.contentView.setImageViewResource(R.id.status_icon,
-                R.drawable.icon);
-        notification.contentView.setTextViewText(R.id.status_text,
-                "Current Progress:");
-        notification.contentView.setProgressBar(R.id.status_progress,
-                100, 50, false);
-
-
-        /**
-         * Listing 10-40: Adding click handlers to your customized extended Notification window layout
-         */
-        Intent newIntent = new Intent(BUTTON_CLICK_ACTION);
-        PendingIntent newPendingIntent =
-                PendingIntent.getBroadcast(MyActivity.this, 2, newIntent, 0);
-
-        notification.contentView.setOnClickPendingIntent(
-                R.id.status_progress, newPendingIntent);
+//        Intent newIntent = new Intent(BUTTON_CLICK_ACTION);
+//        中的flags属性参数：
+//        FLAG_ONE_SHOT 表示返回的PendingIntent仅能执行一次，执行完后自动取消
+//        FLAG_NO_CREATE 表示如果描述的PendingIntent不存在，并不创建相应的PendingIntent，而是返回NULL
+//        FLAG_CANCEL_CURRENT 表示相应的PendingIntent已经存在，则取消前者，然后创建新的PendingIntent
+//        FLAG_UPDATE_CURRENT 表示更新的PendingIntent
+//        PendingIntent newPendingIntent =
+//                PendingIntent.getBroadcast(MyActivity.this, 2, newIntent, 0);
+//        builder.setSmallIcon(R.mipmap.ic_launcher)
+//                .setTicker("Notification")
+//                .setWhen(System.currentTimeMillis())
+//                .setContentTitle("Progress")
+//                .setProgress(100, 50, false)
+//                .setContentIntent(newPendingIntent)
+//                .setContent(myRemoteView);
+//
+//
+//        Notification notification = builder.getNotification();
+////        notification.contentView=myRemoteView;手动设置时，必须设置contentIntent
+////        notification.contentIntent = newPendingIntent;
+//        /**
+//         * Listing 10-39: Customizing your extended Notification window layout
+//         */
+//        notification.contentView.setImageViewResource(R.id.status_icon,
+//                R.drawable.icon);
+//        notification.contentView.setTextViewText(R.id.status_text,
+//                "Current Progress:");
+//        notification.contentView.setProgressBar(R.id.status_progress,
+//                100, 50, false);
+//
+//
+//        /**
+//         * Listing 10-40: Adding click handlers to your customized extended Notification window layout
+//         */
+//
+////4.0后可以加监听器
+//        notification.contentView.setOnClickPendingIntent(
+//                R.id.status_progress, newPendingIntent);
 
         /**
          * Listing 10-41: Applying a custom layout to the Notification ticker
+         * .builder.setOngoing( )
+         * 设置为ture，表示它为一个正在进行的通知。简单的说，当为ture时，不可以被侧滑消失。
          */
         RemoteViews myTickerView =
                 new RemoteViews(this.getPackageName(),
                         R.layout.my_ticker_layout);
-
+//        连续
+//        Notification.FLAG_INSISTENT
+//        持续
+//        notification.flags= notification.flags|Notification.FLAG_ONGOING_EVENT
         builder.setSmallIcon(R.drawable.notification_icon)
                 .setTicker("Notification", myTickerView)
                 .setWhen(System.currentTimeMillis())
+                .setOngoing(true)
                 .setContent(myRemoteView);
 
         return builder;
@@ -172,6 +193,8 @@ public class MyActivity extends Activity {
 
         /**
          * Listing 10-42: Setting an ongoing Notification
+         * .setTicker设置滚动视图
+         * builder.setTicker("状态栏上显示");// 状态栏上显示
          */
         builder.setSmallIcon(R.drawable.notification_icon)
                 .setTicker("Notification")
@@ -195,7 +218,13 @@ public class MyActivity extends Activity {
 
         int NOTIFICATION_REF = 1;
         Notification notification = builder.getNotification();
-
+//        Notification notification = builder.build();
+//        id相同就更新
+//        更新不触发音频，震动，闪烁，Notification.FLAG_ONLY_ALERT_ONCE
+//        builder.setOnlyAlertOnce(true);
+//        单击删除
+//        builder.setAutoCancel() Notification.FLAG_AUTO_CANCEL
+//        notificationManager.cancel(NOTIFICATION_REF);
         notificationManager.notify(NOTIFICATION_REF, notification);
     }
 

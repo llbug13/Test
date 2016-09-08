@@ -1,38 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Listing 10-37: Creating a custom layout for the Notification status window  -->
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:padding="5dp"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-  <ImageView
-    android:id="@+id/status_icon"
-    android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
-    android:layout_alignParentLeft="true"
-  />
-  <RelativeLayout
+<?xml version="1.0" encoding="utf-8"?><!-- Listing 10-37: Creating a custom layout for the Notification status window  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingLeft="10dp"
-    android:layout_toRightOf="@id/status_icon">
-    <TextView
-      android:id="@+id/status_text"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:textColor="#000"
-      android:textSize="14sp"
-      android:textStyle="bold"
-    />
-    <ProgressBar
-      android:id="@+id/status_progress"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/status_text"
-      android:progressDrawable="@android:drawable/progress_horizontal"
-      android:indeterminate="false"
-      android:indeterminateOnly="false"
-    />
-  </RelativeLayout>
+    android:layout_height="150dp"
+    android:background="#f00"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/status_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/status_icon"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text=";;;;;;;;;;;;;;;"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/status_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_text"
+            android:indeterminate="false"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@android:drawable/progress_horizontal" />
+
+        <TextView
+            android:id="@+id/status_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_progress"
+            android:text=";;;;;;;;;;;;;;;qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </RelativeLayout>

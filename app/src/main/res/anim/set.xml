@@ -8,8 +8,8 @@
 
     android:startOffset="20">
     <alpha
-        android:startOffset="20"
-        android:duration="100"/>
+        android:duration="100"
+        android:startOffset="20" />
     <scale />
     <rotate />
     <translate />

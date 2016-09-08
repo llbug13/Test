@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--在不不同的资源values,设置相同的name和不同的layout-->
+    <!--name不能与layout中的名字相同-->
+    <item name="main888" type="layout">@layout/m</item>
+    <item name="main188" type="layout">@layout/main</item>
+</resources>
