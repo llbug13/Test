@@ -9,7 +9,7 @@ import android.view.animation.Animation;
  */
 public class AnimTest {
     private void anim(View view) {
-        AlphaAnimation animation = new AlphaAnimation();
+        AlphaAnimation animation = null;//new AlphaAnimation();
 //        Animation.RESTART循环Animation.REVERSEf方向运行
         animation.setRepeatMode(Animation.RESTART);
         animation.setRepeatCount(Animation.INFINITE);
