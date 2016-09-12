@@ -14,18 +14,23 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <!--震动-->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--硬件加速-->
+    <!--android:hardwareAccelerated="true"-->
     <application
         android:name=".app.app"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <!--单元测试-->
+        <activity android:name=".testunit.MainActivity" />
         <activity android:name=".save.MyFragmentPreferenceActivity" />
+        <!--键盘弹出-->
         <!--android:windowSoftInputMode="stateVisible|adjustResize"-->
         <activity
-            android:name=".tts.SpeakTest"
+            android:name=".draw.MyActivity"
             android:screenOrientation="portrait">
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
