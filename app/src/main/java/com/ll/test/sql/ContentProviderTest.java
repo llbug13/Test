@@ -18,6 +18,15 @@ import android.text.TextUtils;
  * 也可以访问文件
  */
 public class ContentProviderTest extends ContentProvider {
+//    public static final Uri CONTENT_URI = Uri.parse("com.bgtx.runquick.provider.test/elenemts");
+//    //    所有
+//    private static final int ALLROWS = 1;
+//    //    单行
+//    private static final int SINGLE_ROW = 2;
+    //    解析uri
+//    private static final UriMatcher uriMatcher;
+
+
     private static final int ALLROWS = 1;
     private static final int SINGLE_ROW = 2;
 
@@ -47,6 +56,7 @@ public class ContentProviderTest extends ContentProvider {
 //        return false;
     }
 
+    @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
