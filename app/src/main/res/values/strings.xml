@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Test</string>
+    <string name="map">地图</string>
+    <integer name="google_play_services_version">1</integer>
     <plurals name="unicornCunt">
         <item quantity="other">%d unicorns</item>
         <item quantity="one">unicorns</item>
