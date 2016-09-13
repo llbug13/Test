@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--缩放draw-->
+<scale xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@mipmap/ic_launcher"
+    android:scaleGravity="center"
+    android:scaleHeight="100%"
+    android:scaleWidth="100%">
+    <!--ImageView imageView=null;-->
+    <!--(0-10000)-->
+    <!--最终缩放1%-->
+    <!--imageView.setImageLevel(100);-->
+</scale>
