@@ -6,7 +6,7 @@
     <!--<supports-screens-->
     <!--android:largeScreens="false"-->
     <!--android:smallScreens="false"></supports-screens>-->
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -38,7 +38,7 @@
         <!--键盘弹出-->
         <!--android:windowSoftInputMode="stateVisible|adjustResize"-->
         <activity
-            android:name=".map.MapTest"
+            android:name=".mediaplayer.AudioPlayerActivity"
             android:screenOrientation="portrait">
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
@@ -133,6 +133,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <receiver android:name=".mediaplayer.MediaControlReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
