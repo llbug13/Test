@@ -10,13 +10,13 @@ public class L {
 
     public static void i(String msg) {
         if (IS_BUG) {
-            Log.i("----------<>----------", msg);
+            Log.e("----------<>----------", msg);
         }
     }
 
     public static void i(String tag, String msg) {
         if (IS_BUG) {
-            Log.i("----------<" + tag + ">----------", msg);
+            Log.e("----------<" + tag + ">----------", msg);
         }
     }
 }
