@@ -12,6 +12,23 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <!--蓝牙-->
+    <!--读取，启动，查找，绑定-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!--修改一些本地的属性-->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+
+    <!--网络-->
+    <!--读取网络状态记得要加权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--网络状态改变-->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!--wiif-->
+    <!--读取wifi状态记得要加权限-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--wifi状态改变-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <!--goole地图权限-->
     <!--用户位置的精度等级-->
@@ -38,7 +55,7 @@
         <!--键盘弹出-->
         <!--android:windowSoftInputMode="stateVisible|adjustResize"-->
         <activity
-            android:name=".mediaplayer.AudioPlayerActivity"
+            android:name=".wifi.WifiTestActivity"
             android:screenOrientation="portrait">
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
@@ -47,6 +64,8 @@
                 <!--分类 在那种情况下为action提供服务  可以多个 有Android标准的和自定义的-->
                 <!--<category android:name="android.intent.category.ALTERNATIVE" />-->
                 <!--出现在应用程序的启动器中-->
+                <!--网络设置界面-->
+                <!--<action android:name="android.intent.action.MANAGE_NETWORK_USAGE"/>-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -88,7 +107,6 @@
             <!--android:priority="100"只对有序的广播设置优先级是好的做法-->
             <intent-filter android:priority="100">
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-
             </intent-filter>
         </receiver>
         <!--程序插件-->
@@ -138,6 +156,8 @@
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
+        <!--wifi-->
+        <!--蓝牙-->
     </application>
 
 </manifest>
