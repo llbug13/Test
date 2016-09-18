@@ -6,6 +6,28 @@
     <!--<supports-screens-->
     <!--android:largeScreens="false"-->
     <!--android:smallScreens="false"></supports-screens>-->
+
+
+    <!--定义权限-->
+    <!--normal：低风险权限，只要申请了就可以使用（在AndroidManifest.xml中添加<uses-permission>标签），安装时不需要用户确认；-->
+    <!--dangerous：高风险权限，安装时需要用户的确认才可使用；-->
+    <!--signature：只有当申请权限的应用程序的数字签名与声明此权限的应用程序的数字签名相同时（如果是申请系统权限，则需要与系统签名相同），才能将权限授给它；-->
+    <!--signatureOrSystem：签名相同，或者申请权限的应用为系统应用（在system image中）。-->
+    <!--activity-->
+    <!--broadc 可用想你的引用发送broadcast intent-->
+    <!--intent 那个broadc可用接受-->
+    <!--content provider-->
+    <!--service 启动或绑定到某service的能力-->
+    <!--为整个应用设置权限-->
+    <permission
+        android:name="com.ll.test.TEST"
+        android:description="@string/app_name"
+        android:label="ll"
+        android:protectionLevel="dangerous"></permission>
+    <!--给intent加权限-->
+    <!--sendBroadcast(intent,"com.ll.test.TEST")-->
+
+    <!--权限是应用级的安全机制-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
@@ -30,10 +52,21 @@
     <!--wifi状态改变-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
+    <!--NFC-->
+    <uses-permission android:name="android.permission.NFC" />
+
+    <!--电话状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!--发送短信-->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!--读取短信-->
+    <uses-permission android:name="android.permission.READ_SMS" />
     <!--goole地图权限-->
     <!--用户位置的精度等级-->
     <!--fine权限自动获取coarse权限-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--蜂窝网位置变化-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--震动-->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -41,6 +74,12 @@
     <!--android:hardwareAccelerated="true"-->
     <!--指定硬件加速时必须的-->
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
+    <!--电话功能是必须的-->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
+
+
     <application
         android:name=".app.app"
         android:allowBackup="true"
@@ -54,8 +93,10 @@
         <activity android:name=".save.MyFragmentPreferenceActivity" />
         <!--键盘弹出-->
         <!--android:windowSoftInputMode="stateVisible|adjustResize"-->
+        <!--设置activity权限-->
         <activity
-            android:name=".wifi.WifiTestActivity"
+            android:name=".phone.PhoneTest"
+            android:permission="com.ll.LL"
             android:screenOrientation="portrait">
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
@@ -120,9 +161,12 @@
         <!--<category android:name="android.intent.category.SELECTED_ALTERNATIVE" />-->
         <!--</intent-filter>-->
         <!--</activity>-->
+        <!--添加了读写权限-->
         <provider
             android:name=".sql.ContentProviderTest"
-            android:authorities="com.bgtx.runquick.provider.test" />
+            android:authorities="com.bgtx.runquick.provider.test"
+            android:readPermission="asdasdsad"
+            android:writePermission="asdasdasdadasdas" />
         <!-- android:authorities="downloads.com.bgtx.runquick"-->
         <!--<activity android:name=".DatabaseSkeletonSearchActivity"-->
         <!--android:label="Element Search"-->

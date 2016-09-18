@@ -1,6 +1,5 @@
 package com.ll.test.wifi;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -15,6 +14,10 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.p2p.WifiP2pConfig;
+import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pDeviceList;
+import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -25,6 +28,9 @@ import com.ll.test.base.BActivity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -523,17 +529,140 @@ public class WifiTestActivity extends BActivity {
 
 
 //        wifi通信 wi-fi direct传输数据
-        WifiP2pManager wifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        final WifiP2pManager wifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
 //        建立通信通道,Looper用于接收
-        WifiP2pManager.Channel channel = wifiP2pManager.initialize(this, getMainLooper(), new WifiP2pManager.ChannelListener() {
+        final WifiP2pManager.Channel channel = wifiP2pManager.initialize(this, getMainLooper(), new WifiP2pManager.ChannelListener() {
             @Override
             public void onChannelDisconnected() {
+                i("jjjjjjjjjjjj");
                 //                监听通道的丢失情况 wifi
             }
         });
 
 
+//        wifi设置界面
+//        Intent intent = new Intent(
+//                android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+//        startActivity(intent);
+//        发现对等设备的注册
+        BroadcastReceiver peerDiscoveryReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                wifiP2pManager.requestPeers(channel, new WifiP2pManager.PeerListListener() {
+                    public void onPeersAvailable(WifiP2pDeviceList peers) {
+                        deviceList1.clear();
+                        deviceList1.addAll(peers.getDeviceList());
+                        for (WifiP2pDevice wifiP2pDevice : deviceList1) {
+                            i("jjjjjjjjj" + wifiP2pDevice.deviceName);
+                        }
+                    }
+                });
+            }
+        };
+
+        registerReceiver(peerDiscoveryReceiver, new IntentFilter(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION));
+//        扫描监听,发现对等责备
+        wifiP2pManager.discoverPeers(channel, actionListener);
+
+//        连成功的广播
+        BroadcastReceiver connectionChangedReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // Extract the NetworkInfo
+                String extraKey = WifiP2pManager.EXTRA_NETWORK_INFO;
+                NetworkInfo networkInfo =
+                        (NetworkInfo) intent.getParcelableExtra(extraKey);
+
+                // Check if we're connected
+//               是否建立连接
+                if (networkInfo.isConnected()) {
+                    wifiP2pManager.requestConnectionInfo(channel,
+                            new WifiP2pManager.ConnectionInfoListener() {
+                                public void onConnectionInfoAvailable(WifiP2pInfo info) {
+                                    // If the connection is established
+//                                    建立
+                                    if (info.groupFormed) {
+                                        // If we're the server
+//                                        服务器
+                                        if (info.isGroupOwner) {
+                                            // TODO Initiate server socket.
+                                            initiateServerSocket();
+                                        }
+                                        // If we're the client
+//                                        客服
+                                        else if (info.groupFormed) {
+                                            // TODO Initiate client socket.
+                                            initiateClientSocket(info.groupOwnerAddress.toString());
+                                        }
+                                    }
+                                }
+                            });
+                } else {
+                    i("Wi-Fi Direct Disconnected");
+                }
+            }
+        };
+        registerReceiver(connectionChangedReceiver, new IntentFilter(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION));
+//        连接设备
+        WifiP2pConfig config = new WifiP2pConfig();
+        WifiP2pDevice device = null;
+        config.deviceAddress = device.deviceAddress;
+        wifiP2pManager.connect(channel, config, actionListener);
     }
+
+    private void initiateServerSocket() {
+        ServerSocket serverSocket;
+        try {
+            /**
+             * Listing 16-25: Creating a Server Socket
+             */
+            serverSocket = new ServerSocket(8666);
+//            阻尼
+            Socket serverClient = serverSocket.accept();
+
+            // TODO Start Sending Messages
+        } catch (IOException e) {
+            i("I/O Exception");
+        }
+    }
+
+    private void initiateClientSocket(String hostAddress) {
+        /**
+         * Listing 16-26: Creating a client Socket
+         */
+        int timeout = 10000;
+        int port = 8666;
+        InetSocketAddress socketAddress
+                = new InetSocketAddress(hostAddress, port);
+        try {
+            Socket socket = new Socket();
+            socket.bind(null);
+//            阻尼
+            socket.connect(socketAddress, timeout);
+        } catch (IOException e) {
+            i("IO Exception.");
+        }
+
+        // TODO Start Receiving Messages
+    }
+
+    private List<WifiP2pDevice> deviceList1 = new ArrayList<WifiP2pDevice>();
+
+    BroadcastReceiver p2pStatusReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int state = intent.getIntExtra(
+                    WifiP2pManager.EXTRA_WIFI_STATE,
+                    WifiP2pManager.WIFI_P2P_STATE_DISABLED);
+
+            switch (state) {
+                case (WifiP2pManager.WIFI_P2P_STATE_ENABLED):
+                    break;
+                default:
+            }
+        }
+    };
 //    private void initializeWiFiDirect() {
 //        wifiP2pManager =
 //                (WifiP2pManager)getSystemService(Context.WIFI_P2P_SERVICE);
@@ -565,6 +694,7 @@ public class WifiTestActivity extends BActivity {
                     errorMessage += "Unknown error.";
                     break;
             }
+            i("jjjjjjjjjjjj" + errorMessage);
         }
 
         public void onSuccess() {
@@ -573,6 +703,23 @@ public class WifiTestActivity extends BActivity {
         }
     };
 
+    /**
+     * NFC
+     */
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        wifi变化监听
+        registerReceiver(p2pStatusReceiver, new IntentFilter(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION));
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(p2pStatusReceiver);
+        super.onPause();
+    }
 
     @Override
     protected void onDestroy() {
