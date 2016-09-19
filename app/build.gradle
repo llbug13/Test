@@ -24,7 +24,16 @@ android {
         }
     }
 }
-
+//此时你去运行你的aidl会报错，log显示找不到Student的定义，
+// 没错现在你的Student在aidl包下，编译时不会去它下面找类，
+// 此时你需要做以下工作，在build.gradle文件中加入以下代码。
+// 同理你的aidlclient中也要加上。
+//sourceSets {
+//    main {
+//        java.srcDirs = ['src/main/java']
+////        , 'src/main/aidl'
+//    }
+//}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'

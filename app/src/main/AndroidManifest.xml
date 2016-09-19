@@ -62,6 +62,10 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <!--读取短信-->
     <uses-permission android:name="android.permission.READ_SMS" />
+
+    <!--电源管理-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <!--goole地图权限-->
     <!--用户位置的精度等级-->
     <!--fine权限自动获取coarse权限-->
@@ -78,7 +82,11 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="true" />
-
+    <!--摄像头-->
+    <uses-feature android:name="android.hardware.sensor.compass" />
+    <uses-feature android:name="android.hardware.camera" />
+    <!--PackageManager packageManager=getPackageManager();
+        packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);-->
 
     <application
         android:name=".app.app"
@@ -195,7 +203,19 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <receiver android:name=".mediaplayer.MediaControlReceiver">
+        <!--多版本支持-->
+        <!--android:enabled-->
+        <!--这个属性用于定义系统是否能够实例化这个广播接收器，-->
+        <!--如果设置为true，则能够实例化，如果设置为false，-->
+        <!--则不能被实例化。默认值是true。-->
+        <!--<application>元素有它自己的enabled属性，-->
+        <!--这个属性会应用给应用程序的所有组件，包括广播接收器。-->
+        <!--<application>和<receiver>元素的这个属性都必须是true，-->
+        <!--这个广播接收器才能够被启用。如果有一个被设置为false，-->
+        <!--该广播接收器会被禁止实例化。-->
+        <receiver
+            android:name=".mediaplayer.MediaControlReceiver"
+            android:enabled="@bool/supper">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
