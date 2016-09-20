@@ -3,6 +3,7 @@ package com.ll.test.app;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.StrictMode;
 
 /**
  * Created by LL on 2016/8/22.
@@ -13,6 +14,8 @@ public class app extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+//        性能
+        StrictMode.enableDefaults();
         context = getApplicationContext();
 //        应用在创建时调用
     }

@@ -19,11 +19,22 @@
     <!--content provider-->
     <!--service 启动或绑定到某service的能力-->
     <!--为整个应用设置权限-->
+
     <permission
         android:name="com.ll.test.TEST"
         android:description="@string/app_name"
         android:label="ll"
         android:protectionLevel="dangerous"></permission>
+    <!-- 添加快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <!-- 移除快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <!-- 查询快捷方式 -->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+
+
+    <uses-permission android:name="com.ll.LL" />
+    <uses-permission android:name="com.ll.test.TEST" />
     <!--给intent加权限-->
     <!--sendBroadcast(intent,"com.ll.test.TEST")-->
 
@@ -88,6 +99,8 @@
     <!--PackageManager packageManager=getPackageManager();
         packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);-->
 
+    <!--sd卡写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:name=".app.app"
         android:allowBackup="true"
@@ -103,9 +116,9 @@
         <!--android:windowSoftInputMode="stateVisible|adjustResize"-->
         <!--设置activity权限-->
         <activity
-            android:name=".phone.PhoneTest"
-            android:permission="com.ll.LL"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
+            <!--android:permission="com.ll.LL"-->
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->
             <intent-filter>
                 <!--动作 多个 具有唯一性-->
@@ -123,7 +136,13 @@
                 <action android:name="com.paad.notifications.action.BUTTON_CLICK" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity">
+        <activity
+            android:name=".TestActivity"
+            android:icon="@drawable/network"
+            android:label="dasd">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
             <!--指定home 不指定action可以把它作为本地屏幕的可选项-->
@@ -148,6 +167,18 @@
             <!--android:scheme="http" />-->
             <!--</intent-filter>-->
         </activity>
+        <!--别名-->
+        <activity-alias
+            android:name="com.test.tmpcontacts"
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleTask"
+            android:targetActivity=".TestActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
         <!--<activity android:name=".activity.CycleActivity" />-->
         <!--测试广播-->
         <receiver
@@ -170,6 +201,8 @@
         <!--</intent-filter>-->
         <!--</activity>-->
         <!--添加了读写权限-->
+        <!--content://com.example.project.healthcareprovider/nurses/rn查找-->
+        <!--多个时，，，分号来分离每个授权-->
         <provider
             android:name=".sql.ContentProviderTest"
             android:authorities="com.bgtx.runquick.provider.test"
