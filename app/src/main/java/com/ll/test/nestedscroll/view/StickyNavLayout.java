@@ -68,6 +68,8 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
 //        如果你需要消耗一定的dx,dy，
 //        就通过最后一个参数consumed进行指定
 //        例如我要消耗一半的dy，就可以写consumed[1]=dy/2
+//        就是NestedScrollingParent内部的View，在滑动到时候，会首先将dx、dy传入给NestedScrollingParent，NestedScrollingParent可以决定是否对其进行消耗，
+//        一般会根据需求消耗部分或者全部(不过这里并没有实际的约束，你可以随便写消耗多少，可能会对内部View造成一定的影响）。
         Log.e(TAG, dx + "onNestedPreScroll" + dy);
         boolean hiddenTop = dy > 0 && getScrollY() < mTopViewHeight;
         boolean showTop = dy < 0 && getScrollY() >= 0 && !ViewCompat.canScrollVertically(target, -1);
@@ -87,9 +89,11 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
 
     @Override
     public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+//        当顶部控件显示时，fling可以让顶部控件隐藏或者显示。
         Log.e(TAG, "onNestedPreFling");
         //down - //up+
         if (getScrollY() >= mTopViewHeight) return false;
+        Log.e(TAG, ";;;onNestedPreFling");
         fling((int) velocityY);
         return true;
     }
@@ -226,6 +230,10 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
 
 
     public void fling(int velocityY) {
+//        ☞ fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY)
+//        这个方法也很重要，如果你想实现滑动之后，布局能够根据移动速度，慢慢减速的话，
+//        就需要用这个来实现，这里需要加速度的参数，我们可以通过VelocityTracker这个类来获取，
+//        然后使用，具体参数函数，在下面的实例中进行说明。
         mScroller.fling(0, getScrollY(), 0, velocityY, 0, 0, 0, mTopViewHeight);
         invalidate();
     }
@@ -246,6 +254,7 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
+            Log.e(TAG, mScroller.getCurrY() + "[[[onNestedPreFling");
             scrollTo(0, mScroller.getCurrY());
             invalidate();
         }
