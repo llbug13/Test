@@ -19,12 +19,21 @@ import com.ll.test.R;
 public class StickyNavLayout extends LinearLayout implements NestedScrollingParent {
     private static final String TAG = "StickyNavLayout";
 
+    /**
+     * 回调开始滑动
+     *
+     * @param child            该父VIew 的子View
+     * @param target           支持嵌套滑动的 VIew
+     * @param nestedScrollAxes 滑动方向
+     * @return 是否支持 嵌套滑动
+     */
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
 //        onStartNestedScroll该方法，一定要按照自己的需求返回true，
 //        该方法决定了当前控件是否能接收到其内部View(非并非是直接子View)滑动时的参数；
 //        假设你只涉及到纵向滑动，这里可以根据nestedScrollAxes这个参数，进行纵向判断。
         Log.e(TAG, "onStartNestedScroll");
+//        return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
         return true;
     }
 
@@ -43,13 +52,23 @@ public class StickyNavLayout extends LinearLayout implements NestedScrollingPare
         Log.e(TAG, "onNestedScroll");
     }
 
+    /**
+     * 这里 传来了 x y 方向上的滑动距离
+     * 并且 先与 子VIew  处理滑动,  并且 consumed  中可以设置相应的 除了的距离
+     * 然后 子View  需要更具这感觉, 来处理自己滑动
+     *
+     * @param target
+     * @param dx
+     * @param dy
+     * @param consumed
+     */
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
 //        onNestedPreScroll该方法的会传入内部View移动的dx,dy，
 //        如果你需要消耗一定的dx,dy，
 //        就通过最后一个参数consumed进行指定
 //        例如我要消耗一半的dy，就可以写consumed[1]=dy/2
-        Log.e(TAG, "onNestedPreScroll");
+        Log.e(TAG, dx + "onNestedPreScroll" + dy);
         boolean hiddenTop = dy > 0 && getScrollY() < mTopViewHeight;
         boolean showTop = dy < 0 && getScrollY() >= 0 && !ViewCompat.canScrollVertically(target, -1);
 
