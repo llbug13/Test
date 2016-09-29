@@ -119,7 +119,7 @@
         <!--android:windowSoftInputMode="stateVisible|adjustResize"-->
         <!--设置activity权限-->
         <activity
-            android:name=".web.WebTest"
+            android:name=".nestedscroll.MainActivity"
             android:screenOrientation="portrait">
             <!--android:permission="com.ll.LL"-->
             <!--android:uiOptions="splitActionBarWhenNarrow"拆分操作栏-->

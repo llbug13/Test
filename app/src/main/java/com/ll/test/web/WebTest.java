@@ -23,12 +23,12 @@ import android.widget.TextView;
 
 import com.ll.test.R;
 import com.ll.test.base.BActivity;
+import com.ll.test.log.L;
 
 /**
  * Created by LL on 2016/9/21.
- *
+ * <p>
  * Cordova插件
- *
  */
 public class WebTest extends BActivity {
     private WebView webView;
@@ -38,6 +38,7 @@ public class WebTest extends BActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_test);
         webView = (WebView) findViewById(R.id.web_web);
+        L.b();
         webView.loadUrl("http://www.baidu.com");
 //        webview.loadUrl(file:///android_asset/index.html);
 
