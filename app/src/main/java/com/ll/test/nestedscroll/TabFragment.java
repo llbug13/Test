@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ll.test.R;
+import com.ll.test.ndk.NDKTest;
 import com.zhy.base.adapter.ViewHolder;
 import com.zhy.base.adapter.recyclerview.CommonAdapter;
 
@@ -45,7 +46,7 @@ public class TabFragment extends Fragment
         // mTextView.setText(mTitle);
         for (int i = 0; i < 50; i++)
         {
-            mDatas.add(mTitle + " -> " + i);
+            mDatas.add(mTitle + " -> " + i+ NDKTest.stringFromJNI());
         }
         mRecyclerView.setAdapter(new CommonAdapter<String>(getActivity(), R.layout.item, mDatas)
         {

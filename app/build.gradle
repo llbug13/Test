@@ -16,11 +16,34 @@ android {
 
         //ADD THIS LINE:
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+//            moduleName "CipherUtils"
+//            stl "gnustl_static" // stlport_static
+            abiFilters "armeabi", "armeabi-v7a"
+//            ldLibs "log", "android"
+        }
+    }
+    sourceSets.main {
+        // 如果不写(jni.srcDirs = ['src/main/jni/'])
+        // Android展示模式没有jni目录
+        // this file has been added after the last project sync with gradle
+        // 必须有值,如: 'src/main/jni/'
+        jni.srcDirs = ['src/main/cpp/']
+        // jniLibs.srcDir "libs"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable = true
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            //配置CMakeLists.txt的路径
+            path "CMakeLists.txt"
         }
     }
 }
