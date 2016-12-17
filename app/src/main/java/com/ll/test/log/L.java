@@ -1,17 +1,61 @@
 package com.ll.test.log;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.util.Log;
+
+import com.ll.test.java.Java;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.logging.*;
+import java.util.logging.Logger;
+
 /**
  * Created by LL on 2016/8/22.
  */
+
 public class L {
+
     private final static boolean IS_BUG = true;
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static void log() {
+        java.util.logging.Logger.getGlobal().info("");
+        Logger logger1 = Logger.getLogger("sd.a.4");
+        Logger logger = Logger.getLogger("sd.a");
+        logger.setLevel(Level.FINE);
+        logger.fine("");
+        logger.warning("");
+        logger.log(Level.FINE, "");
+        logger.logp(Level.ALL,"","","");
+        LogManager logManager=null;
+//        logger.entering();
+//        logger.exiting();
+        ConsoleHandler consoleHandler=null;
+//        consoleHandler.setLevel();
+        Thread.dumpStack();
+    }
+
+
+    public static void out(Object... o) {
+        if (IS_BUG) {
+            if (o != null) {
+                if (o.length == 1) {
+                    System.out.println(o[0].getClass());
+                } else {
+                    System.out.println(o[0].getClass() + "::" + o[1]);
+                }
+
+            } else {
+                System.out.println("null");
+            }
+
+        }
+    }
 
     public static void i(String msg) {
         if (IS_BUG) {

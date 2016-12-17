@@ -1,7 +1,7 @@
 package com.ll.test.draw;
 
 import android.content.Context;
-import android.graphics.AvoidXfermode;
+//import android.graphics.AvoidXfermode;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
@@ -137,8 +137,8 @@ public class PaintUse extends View {
 //        PixelXorXfermode
 //        已有16种
 //        PorterDuffXfermode
-        AvoidXfermode avoidXfermode = new AvoidXfermode(Color.RED, 10, AvoidXfermode.Mode.AVOID);
-        paint.setXfermode(avoidXfermode);
+//        AvoidXfermode avoidXfermode = new AvoidXfermode(Color.RED, 10, AvoidXfermode.Mode.AVOID);
+//        paint.setXfermode(avoidXfermode);
     }
 
     private void bitmap(View view, Context context) {

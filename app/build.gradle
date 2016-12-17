@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//注解
+//apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     configurations.all {
@@ -60,7 +62,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:support-v4:+'
     compile 'com.zhy:base-adapter:2.0.0'
@@ -74,4 +76,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    注解
+//    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.jakewharton:butterknife:8.0.1'
 }

@@ -56,6 +56,7 @@ public class ImageActivity extends BActivity {
 //        你可能会有这样的担心，调用 mutate() 是不是在内存中把 Bitmap 拷贝了一份？
 //        其实不是这样的，还是公用的 Bitmap，
 //        只是拷贝了一份状态值，这个数据量很小，所以不用担心。
+//        wrap版本控制
         final Drawable wrappedDrawable = DrawableCompat.wrap(drawable.mutate());
         DrawableCompat.setTintList(wrappedDrawable, colors);
         return wrappedDrawable;
